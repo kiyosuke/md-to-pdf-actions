@@ -32,13 +32,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      # Runs a set of commands using the runners shell
+      # md-to-pdfを使用しすべてのMarkdownをPDFに変換する
       - name: Markdown to PDF
         run: |
           yarn install
           npx md-to-pdf ./markdowns/*.md
+          ls
         
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: generated-pdf
           path: ./markdowns/*.pdf
