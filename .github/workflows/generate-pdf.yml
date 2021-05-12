@@ -20,6 +20,11 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
+      - name: Install Ubuntu Packages
+        run: |
+          sudo apt-get install fonts-takao-mincho fonts-takao
+          
+      
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
@@ -36,7 +41,7 @@ jobs:
       - name: Markdown to PDF
         run: |
           yarn install
-          npx md-to-pdf ./markdowns/*.md
+          npx md-to-pdf ./markdowns/*.md --md-file-encoding utf-8
           ls
         
       - uses: actions/upload-artifact@v2
